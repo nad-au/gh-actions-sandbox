@@ -25,8 +25,10 @@ jobs:
       - name: Set the value
         id: step_one
         run: |
-          echo "action_state=yellow" >> $GITHUB_ENV
+          SECRET_VALUE=yellow
+          echo "::add-mask::$SECRET_VALUE"
+          echo "{action_state}=$SECRET_VALUE" >> $GITHUB_ENV
       - name: Use the value
         id: step_two
         run: |
-          echo "${{ env.action_state }}" # This will output 'yellow'      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+          echo "${{ env.action_state }}" # This will output 'yellow'
