@@ -30,7 +30,8 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            echo "{apikey}=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")" >> $GITHUB_OUTPUT
+            APIKEY=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")
+            echo "{apikey}=$APIKEY" >> $GITHUB_OUTPUT
 
       - name: Use the value
         run: |
