@@ -37,8 +37,8 @@ jobs:
         with:
           path: ./file.txt
           contents: |
-            ${{ env.secret }}
-            
+            echo ${{ env.secret }}
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
