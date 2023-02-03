@@ -32,7 +32,7 @@ jobs:
           inlineScript: |
             # APIKEY=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")
             APIKEY="HELLO"
-            echo "{apikey}=$APIKEY" >> $GITHUB_OUTPUT
+            echo "apikey=$APIKEY" >> $GITHUB_OUTPUT
 
       - name: Use the value
         run: |
