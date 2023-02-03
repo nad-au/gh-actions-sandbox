@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,8 +23,8 @@ jobs:
       - name: Set the value
         id: step_one
         run: |
-          SECRET_VALUE=yellow
           echo "::add-mask::$SECRET_VALUE"
+          SECRET_VALUE=yellow
           echo "{action_state}=$SECRET_VALUE" >> $GITHUB_ENV
       - name: Use the value
         id: step_two
