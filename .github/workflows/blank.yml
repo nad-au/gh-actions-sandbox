@@ -29,10 +29,8 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            SECRET_VALUE=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")
-            echo "::add-mask::$SECRET_VALUE"
-            echo "{secret}=$SECRET_VALUE" >> $GITHUB_ENV
+            echo "{key}=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")" >> $GITHUB_ENV
 
       - name: Use the value
         run: |
-          echo "${{ env.secret }}"
+          echo "${{ env.key }}"
