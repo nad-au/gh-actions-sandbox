@@ -34,6 +34,14 @@ jobs:
             echo "::add-mask::$APIKEY"
             echo "apikey=$APIKEY" >> $GITHUB_OUTPUT
 
-      - name: Use the value
-        run: |
-          echo "${{ steps.get_deployment_key.outputs.apikey }}"
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.get_deployment_key.outputs.apikey }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for GitHub integrations (i.e. PR comments)
+          action: "upload"
+          app_location: "swa-next" # App source code path relative to repository root
+          output_location: "out" # Built app content directory, relative to app_location - optional
+        env:
+          is_static_export: true          
