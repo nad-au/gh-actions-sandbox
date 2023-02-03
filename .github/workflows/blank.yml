@@ -25,11 +25,13 @@ jobs:
         with:
           creds: ${{ secrets.AZ_CREDS }}
 
-      - name: "Run az commands"
-        run: |
-          az account show
-          az group list
-          pwd
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.44.1
+          inlineScript: |
+            az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey"
+
       - name: Set the value
         id: step_one
         run: |
