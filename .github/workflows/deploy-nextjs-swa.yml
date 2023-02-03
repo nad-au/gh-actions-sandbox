@@ -1,0 +1,40 @@
+name: Deploy Next.js app to Azure Static Web Apps
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Az CLI login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZ_CREDS }}
+
+      - name: Get SWA deployment key
+        id: get_deployment_key
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            APIKEY=$(az staticwebapp secrets list --name nest-settings-app | jq '.properties.apiKey' -r)
+            echo "::add-mask::$APIKEY"
+            echo "apikey=$APIKEY" >> $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v2
+
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.get_deployment_key.outputs.apikey }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "swa-next"
+          output_location: "out"
+        env:
+          is_static_export: true
