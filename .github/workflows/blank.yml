@@ -25,7 +25,6 @@ jobs:
         run: |
           SECRET_VALUE=$((RANDOM))
           echo "::add-mask::$SECRET_VALUE"
-          SECRET_VALUE=yellow
           echo "{secret}=$SECRET_VALUE" >> $GITHUB_ENV
       - name: Use the value
         id: step_two
