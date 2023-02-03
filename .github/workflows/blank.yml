@@ -26,11 +26,14 @@ jobs:
           creds: ${{ secrets.AZ_CREDS }}
 
       - name: Azure CLI script
+        id: get_deployment_key
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            echo "{key}=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")" >> $GITHUB_ENV
+            SECRET_VALUE=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")
+            # echo "::add-mask::$SECRET_VALUE"
+            echo "{apikey}=$(az staticwebapp secrets list --name nest-settings-app --query "properties.apiKey")" >> $GITHUB_OUTPUT
 
       - name: Use the value
         run: |
-          echo "${{ env.key }}"
+          echo "${{ steps.get_deployment_key.outputs.apikey }}"
