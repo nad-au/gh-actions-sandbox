@@ -9,6 +9,9 @@ export default function Document(props) {
       lang="en"
     >
       <Head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/oto-favicon-180.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/oto-favicon-32.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/oto-favicon-16.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
