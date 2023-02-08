@@ -23,9 +23,17 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
+      colors: {
+        otoblue: '#516AE3',
+        otodarkblue: '#121840',
+      },
       fontFamily: {
         sans: ['Lato', ...defaultTheme.fontFamily.sans],
         display: ['Oswald', ...defaultTheme.fontFamily.sans],
+      },
+      padding: {
+        '1/2': '50%',
+        full: '100%',
       },
       maxWidth: {
         '2xl': '40rem',
