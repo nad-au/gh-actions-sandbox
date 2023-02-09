@@ -32,7 +32,7 @@ module.exports = {
         display: ['Oswald', ...defaultTheme.fontFamily.sans],
       },
       padding: {
-        '1/2': '50%',
+        '10pc': '10%',
         full: '100%',
       },
       maxWidth: {
